@@ -1,0 +1,34 @@
+pkgname=geogebra-6
+pkgver=6.0.666.0
+pkgrel=1
+pkgdesc="Dynamic mathematics software with interactive graphics, algebra and spreadsheet"
+arch=('x86_64')
+url='https://www.geogebra.org/'
+license=('custom')
+depends=('hicolor-icon-theme' 'gtk2' 'xdg-utils' 'libxtst' 'gconf' 'nss' 'libxss' 'libcanberra' 'gmp' )
+optdepends=('libxcb: for inputing non-ASCII characters')
+source=("geogebra6.deb"
+        "geogebra-6.install"
+        '_license.txt'
+        #"https://raw.fastgit.org/geogebra/geogebra/master/desktop/src/nonfree/resources/org/geogebra/desktop/_license.txt"
+
+        )
+
+sha512sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            )
+install='geogebra-6.install'
+            
+package() {
+
+  tar -xf "$srcdir/data.tar.xz" -C "$pkgdir/"
+  
+  rm -rf "$pkgdir/etc/"
+  
+  install -Dm644 _license.txt "$pkgdir"/usr/share/licenses/geogebra-classic/_license.txt
+
+  #install -Dm644 "${srcdir}/geogebra.desktop" "${pkgdir}/usr/share/applications/geogebra.desktop"
+  #install -Dm644 "${srcdir}/geogebra-logo.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/geogebra.svg"
+  #install -Dm644 "${srcdir}/geogebra-mime.xml" "${pkgdir}/usr/share/mime/packages/geogebra.xml"
+}

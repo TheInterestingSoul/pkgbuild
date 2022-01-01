@@ -1,0 +1,11 @@
+post_install() {
+	if [ "$1" = "configure" ] && [ -x "`which update-mime-database 2>/dev/null`" ]; then
+	update-mime-database /usr/share/mime
+    fi
+}
+
+post_remove() {
+	if [ -x "`which update-mime-database 2>/dev/null`" ]; then
+	update-mime-database /usr/share/mime
+    fi
+}

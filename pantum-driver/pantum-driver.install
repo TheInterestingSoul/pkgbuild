@@ -1,0 +1,23 @@
+post_install() {
+    QPDF_EXIST=$(qpdf --version &> /dev/null ;echo $?)
+    if [ "$QPDF_EXIST" == "127" ];then
+        QPDF_VERSION=1
+    else
+        QPDF_VERSION=`qpdf --version |grep version |awk '{print $3}' |awk -F\. '{print $1}'`
+    fi
+
+    if [ $QPDF_VERSION -lt 8 ];then
+        echo "/opt/pantum/lib" > /etc/ld.so.conf.d/pantum.conf
+        sudo ldconfig
+    fi
+
+    echo Pantum-1.1.74-1 installed
+
+
+}
+
+pre_remove() {
+    echo Removing config...
+	rm -rf /etc/ld.so.conf.d/pantum.conf
+    ldconfig
+}
