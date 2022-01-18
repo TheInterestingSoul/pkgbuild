@@ -1,0 +1,15 @@
+pkgname=ttf-th-tshyn
+pkgver=3.0.0
+pkgrel=1
+pkgdesc="A set of Chinese serif fonts that covers all CJK characters in Unicode 13.0"
+url="http://cheonhyeong.com/Simplified/download.html"
+arch=(any)
+license=(personal use only)
+source=("http://cheonhyeong.com/File/TH-Tshyn-${pkgver}.7z")
+#source=("file://TH-Tshyn-${pkgver}.7z")
+
+package() {
+    install -d ${pkgdir}/usr/share/fonts/TTF/
+    install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
+}
+sha256sums=('39dca1d807558d12df8a0aa14012bb767739f2ccc5fe953159488f28a9d98956')
